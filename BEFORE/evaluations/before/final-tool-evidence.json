@@ -1,0 +1,80 @@
+[
+  {
+    "name": "skill-validator",
+    "argv": [
+      "C:\\Python314\\python.exe",
+      "-X",
+      "utf8",
+      "C:\\Users\\duyan\\.codex\\skills\\.system\\skill-creator\\scripts\\quick_validate.py",
+      "E:\\Project\\AI-assisted-kit\\Layer-Gated Development\\.agents\\skills\\before"
+    ],
+    "exit_code": 0,
+    "stdout": "Skill is valid!\n",
+    "stderr": ""
+  },
+  {
+    "name": "fixture",
+    "argv": [
+      "C:\\Python314\\python.exe",
+      "-X",
+      "utf8",
+      "E:\\Project\\AI-assisted-kit\\Layer-Gated Development\\evaluations\\before\\run_fixture.py"
+    ],
+    "exit_code": 0,
+    "stdout": "BEFORE deterministic fixture\nroot: E:\\Project\\AI-assisted-kit\\Layer-Gated Development\\evaluations\\before\nNote: actual unittest runs; this is not an LLM forward-eval.\n\nA - atomic mini-goal: RED because behavior is missing, then GREEN\n  [A-RED] python -m unittest -v tests.acceptance.test_order_total -> exit=1\n           NotImplementedError: FT-ORDER-001 behavior not implemented | ERROR: test_two_items_ten_percent_discount (tests.acceptance.test_order_total.OrderTotalAcceptance.test_two_items_ten_percent_discount) | NotImplementedError: FT-ORDER-001 behavior not implemented | FAILED (errors=4)\n  PASS  A RED fails\n  PASS  A RED reason is missing behavior\n  [A-GREEN] python -m unittest -v tests.acceptance.test_order_total -> exit=0\n           OK\n  PASS  A GREEN acceptance passes\n  [A-SAFETY] python -m unittest -v tests.safety.test_order_total -> exit=0\n           OK\n  PASS  A safety baseline passes\n  PASS  A contract/tests unchanged\n\nB - in-scope failure: fix implementation, never tests/contract\n  [B-FAIL] python -m unittest -v tests.acceptance.test_order_total -> exit=1\n           FAIL: test_half_up_rounding (tests.acceptance.test_order_total.OrderTotalAcceptance.test_half_up_rounding) | AssertionError: 2 != 3 | FAILED (failures=1)\n  PASS  B failing test is observed\n  PASS  B failure is the rounding behavior\n  [B-FIX] python -m unittest -v tests.acceptance.test_order_total -> exit=0\n           OK\n  PASS  B final acceptance passes\n  PASS  B contract/tests unchanged\n\nD - safety failure: acceptance green is not release-ready\n  [D-ACCEPTANCE] python -m unittest -v tests.acceptance.test_order_total -> exit=0\n           OK\n  PASS  D acceptance passes\n  [D-SAFETY] python -m unittest -v tests.safety.test_order_total -> exit=1\n           AssertionError: <class 'float'> is not <class 'int'> | FAIL: test_total_is_integer_cents (tests.safety.test_order_total.OrderTotalSafety.test_total_is_integer_cents) | AssertionError: <class 'float'> is not <class 'int'> | FAILED (failures=2)\n  PASS  D safety fails\n  PASS  D failure is the integer-cents invariant\n  PASS  D not release-ready\n  [D-FIX-ACCEPTANCE] python -m unittest -v tests.acceptance.test_order_total -> exit=0\n           OK\n  [D-FIX-SAFETY] python -m unittest -v tests.safety.test_order_total -> exit=0\n           OK\n  PASS  D fixed acceptance passes\n  PASS  D fixed safety passes\n  PASS  D fixed becomes release-ready for the fixture gate\n\nE - refactor of already-GREEN code: no fake RED\n  [E-BASELINE] python -m unittest -v tests.acceptance.test_order_total -> exit=0\n           OK\n  PASS  E baseline is GREEN before refactor\n  [E-BAD-REFACTOR] python -m unittest -v tests.acceptance.test_order_total -> exit=1\n           FAIL: test_half_up_rounding (tests.acceptance.test_order_total.OrderTotalAcceptance.test_half_up_rounding) | AssertionError: 2 != 3 | FAILED (failures=1)\n  PASS  E regression catches changed output\n  PASS  E failure is half-up behavior\n  [E-RESTORE] python -m unittest -v tests.acceptance.test_order_total -> exit=0\n           OK\n  PASS  E compatible behavior restored\n  PASS  E no fake initial RED created\n  PASS  E contract/tests unchanged\n\nSummary\nRESULT: PASS - A/B/D/E observed with real unittest exit codes.\nLIMITATION: deterministic fixture only; no LLM behavior was evaluated.\n",
+    "stderr": ""
+  },
+  {
+    "name": "illustrative-policy",
+    "argv": [
+      "C:\\Python314\\python.exe",
+      "-X",
+      "utf8",
+      "E:\\Project\\AI-assisted-kit\\Layer-Gated Development\\evaluations\\before\\policy_model.py"
+    ],
+    "exit_code": 0,
+    "stdout": "BEFORE deterministic policy model\nLIMITATION: this validates decision-record invariants, not LLM behavior.\n\nC - unauthorized behavior/expected-output change\n  PASS  C approval-needed, no silent edit/weakening\n\nF - confirmed bug creates regression draft, new scope unapproved\n  PASS  F regression draft + backlog proposal, no scope expansion\n\nG - missing rubric/scope: one BA question, no code\n  PASS  G one question, code blocked\n\nH - rolling implementation with mocks and unclear next behavior\n  PASS  H implement A, not B; integration NOT VERIFIED\n\nI - API/environment failure is not a code defect\n  PASS  I no invented key, no fabricated live pass\n  PASS  I code defect is fixed in scope\n\nJ - mutation with unknown stop policy: ask before execution\n  PASS  J approval-needed, no invented stop conditions\n\nSummary\nRESULT: PASS - C/F/G/H/I/J deterministic policy invariants hold.\nLIMITATION: no agent forward-eval was run.\n",
+    "stderr": ""
+  },
+  {
+    "name": "structure",
+    "argv": [
+      "C:\\Python314\\python.exe",
+      "-X",
+      "utf8",
+      "E:\\Project\\AI-assisted-kit\\Layer-Gated Development\\evaluations\\before\\check_bundle.py"
+    ],
+    "exit_code": 0,
+    "stdout": "BEFORE bundle structure and decision-sync check\nproject: E:\\Project\\AI-assisted-kit\\Layer-Gated Development\n\n  PASS  required files exist\n  PASS  D-01..D-14 present in canonical + snapshot\n  PASS  PI-01..PI-08 present in canonical + snapshot\n  PASS  HM-01..HM-07 present in canonical + snapshot\n  PASS  U1-U7/P1-P10/O1-O7/C1-C2 in canonical\n  PASS  five mode names in SKILL.md\n  PASS  capture-feedback + replan actions documented\n  PASS  references are linked from SKILL.md\n  PASS  usage has $before examples\n  PASS  root and snapshot share version 1.0\n  PASS  no TODO scaffold placeholder\n\nSummary\nRESULT: PASS - structure, mode names, references, decision IDs and snapshot sync markers hold.\nLIMITATION: this checks presence/sync markers, not semantic correctness or runtime discovery.\n",
+    "stderr": ""
+  },
+  {
+    "name": "source-diff",
+    "argv": [
+      "git",
+      "-C",
+      "E:\\Project\\AI-assisted-kit",
+      "diff",
+      "--exit-code",
+      "--",
+      "Layer-Gated Development/LGD_HANDOFF.md",
+      "Layer-Gated Development/CODEX_BOOTSTRAP_PROMPT.md"
+    ],
+    "exit_code": 0,
+    "stdout": "",
+    "stderr": ""
+  },
+  {
+    "name": "git-status",
+    "argv": [
+      "git",
+      "-C",
+      "E:\\Project\\AI-assisted-kit",
+      "status",
+      "--short"
+    ],
+    "exit_code": 0,
+    "stdout": "?? \"Layer-Gated Development/.agents/\"\n?? \"Layer-Gated Development/BEFORE_DECISIONS.md\"\n?? \"Layer-Gated Development/BEFORE_USAGE.md\"\n?? \"Layer-Gated Development/BEFORE_VALIDATION.md\"\n?? \"Layer-Gated Development/evaluations/\"\n",
+    "stderr": ""
+  }
+]
